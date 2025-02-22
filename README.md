@@ -84,6 +84,52 @@ Return a list of student names of students who are not enrolled in any course.
 |-------------|
 | Alice       |
 
+### Database Seeding Script
+```sql
+CREATE TABLE Employees (
+    EmployeeID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Department VARCHAR(50),
+    Salary DECIMAL(10,2)
+);
+
+CREATE TABLE Projects (
+    ProjectID INT PRIMARY KEY,
+    ProjectName VARCHAR(100),
+    Budget DECIMAL(10,2)
+);
+
+CREATE TABLE EmployeeProjects (
+    EmployeeID INT,
+    ProjectID INT,
+    Role VARCHAR(50),
+    FOREIGN KEY (EmployeeID) REFERENCES Employees(EmployeeID),
+    FOREIGN KEY (ProjectID) REFERENCES Projects(ProjectID),
+    PRIMARY KEY (EmployeeID, ProjectID)
+);
+```
+
+### Insert Sample Data
+```sql
+INSERT INTO Employees (EmployeeID, Name, Department, Salary) VALUES
+(1, 'John Doe', 'IT', 5000),
+(2, 'Jane Smith', 'HR', 4000),
+(3, 'Alice Johnson', 'IT', 5500),
+(4, 'Bob Brown', 'Finance', 4500);
+
+INSERT INTO Projects (ProjectID, ProjectName, Budget) VALUES
+(101, 'Website Redesign', 20000),
+(102, 'Database Migration', 30000),
+(103, 'Security Audit', 15000);
+
+INSERT INTO EmployeeProjects (EmployeeID, ProjectID, Role) VALUES
+(1, 101, 'Developer'),
+(1, 102, 'Database Admin'),
+(2, 103, 'HR Specialist'),
+(3, 101, 'Lead Developer'),
+(4, 102, 'Finance Analyst');
+```
+
 ## 6. List Employees and Their Projects
 
 Retrieve all employees and the projects they are working on.
