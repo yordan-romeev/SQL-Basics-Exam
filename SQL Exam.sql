@@ -148,3 +148,17 @@ SELECT *
 FROM Employees
 WHERE EmployeeID NOT IN (SELECT DISTINCT EmployeeID FROM EmployeeProjects)
 
+-- 11. Create a Stored Procedure
+
+GO 
+
+CREATE PROCEDURE sp_GetEmployeesByDepartment @DepartmentName VARCHAR(50)
+AS
+BEGIN
+    SELECT * FROM Employees WHERE Department = @DepartmentName;
+END
+
+GO
+
+-- Sample Usage
+EXEC sp_GetEmployeesByDepartment 'IT'
