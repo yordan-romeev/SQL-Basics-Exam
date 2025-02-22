@@ -195,3 +195,23 @@ IF @@ERROR <> 0
 ELSE
     COMMIT TRANSACTION;
 
+-- 14. Optimize a Query
+
+-- SELECT e.Name, p.ProjectName, p.Budget
+-- FROM Employees e
+-- JOIN EmployeeProjects ep ON e.EmployeeID = ep.EmployeeID
+-- JOIN Projects p ON ep.ProjectID = p.ProjectID
+-- WHERE p.Budget > (SELECT AVG(Budget) FROM Projects);
+
+
+-- Optimised to calculate the Average Budget only once, instead of for every row of the joined set
+
+DECLARE @AveragaBudget DECIMAL(10,2);
+SELECT @AveragaBudget = AVG(Budget) FROM Projects;
+
+SELECT e.Name, p.ProjectName, p.Budget
+FROM Employees e
+JOIN EmployeeProjects ep ON e.EmployeeID = ep.EmployeeID
+JOIN Projects p ON ep.ProjectID = p.ProjectID
+WHERE p.Budget > @AveragaBudget;
+GO
