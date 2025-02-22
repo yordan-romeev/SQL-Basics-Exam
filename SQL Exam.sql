@@ -113,3 +113,9 @@ INSERT INTO EmployeeProjects (EmployeeID, ProjectID, Role) VALUES
 (3, 101, 'Lead Developer'),
 (4, 102, 'Finance Analyst');
 
+-- 06. List of Employees and Their Projects
+
+SELECT e.Name, p.ProjectName, ep.Role
+FROM EmployeeProjects ep 
+JOIN Employees e ON e.EmployeeID = ep.EmployeeID
+JOIN Projects p ON p.ProjectID = ep.ProjectID
