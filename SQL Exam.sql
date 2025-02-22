@@ -162,3 +162,21 @@ GO
 
 -- Sample Usage
 EXEC sp_GetEmployeesByDepartment 'IT'
+
+-- 12. Implement a User-Defined Function
+GO
+
+CREATE FUNCTION fn_GetProjectBudget(@ProjectID INT)
+RETURNS DECIMAL(10,2)
+AS
+BEGIN
+    DECLARE @Result DECIMAL(10,2);
+    SELECT @Result = Budget FROM Projects WHERE ProjectID = @ProjectID;
+    RETURN @Result;
+END
+
+GO
+
+-- Sample Usage
+SELECT dbo.fn_GetProjectBudget(101)
+
