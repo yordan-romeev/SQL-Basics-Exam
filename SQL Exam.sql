@@ -64,3 +64,52 @@ SELECT c.CourseName, COUNT(DISTINCT e.StudentID) AS StudentCount
 FROM Enrollments e
 JOIN Courses c ON c.CourseID = e.CourseID
 GROUP BY c.CourseName
+
+-- 05. Find Students Without Courses
+
+SELECT s.Name as StudentName
+FROM Students s
+WHERE StudentID NOT IN (SELECT DISTINCT StudentID FROM Enrollments)
+
+-- Database Seeding Script
+
+CREATE TABLE Employees (
+    EmployeeID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Department VARCHAR(50),
+    Salary DECIMAL(10,2)
+);
+
+CREATE TABLE Projects (
+    ProjectID INT PRIMARY KEY,
+    ProjectName VARCHAR(100),
+    Budget DECIMAL(10,2)
+);
+
+CREATE TABLE EmployeeProjects (
+    EmployeeID INT,
+    ProjectID INT,
+    Role VARCHAR(50),
+    FOREIGN KEY (EmployeeID) REFERENCES Employees(EmployeeID),
+    FOREIGN KEY (ProjectID) REFERENCES Projects(ProjectID),
+    PRIMARY KEY (EmployeeID, ProjectID)
+);
+
+INSERT INTO Employees (EmployeeID, Name, Department, Salary) VALUES
+(1, 'John Doe', 'IT', 5000),
+(2, 'Jane Smith', 'HR', 4000),
+(3, 'Alice Johnson', 'IT', 5500),
+(4, 'Bob Brown', 'Finance', 4500);
+
+INSERT INTO Projects (ProjectID, ProjectName, Budget) VALUES
+(101, 'Website Redesign', 20000),
+(102, 'Database Migration', 30000),
+(103, 'Security Audit', 15000);
+
+INSERT INTO EmployeeProjects (EmployeeID, ProjectID, Role) VALUES
+(1, 101, 'Developer'),
+(1, 102, 'Database Admin'),
+(2, 103, 'HR Specialist'),
+(3, 101, 'Lead Developer'),
+(4, 102, 'Finance Analyst');
+
