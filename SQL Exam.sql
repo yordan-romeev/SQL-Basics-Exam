@@ -161,7 +161,7 @@ END
 GO
 
 -- Sample Usage
-EXEC sp_GetEmployeesByDepartment 'IT'
+-- EXEC sp_GetEmployeesByDepartment 'IT'
 
 -- 12. Implement a User-Defined Function
 GO
@@ -178,5 +178,20 @@ END
 GO
 
 -- Sample Usage
-SELECT dbo.fn_GetProjectBudget(101)
+-- SELECT dbo.fn_GetProjectBudget(101)
+
+-- 13. Implement a Transaction
+
+BEGIN TRANSACTION;
+
+INSERT INTO Employees (EmployeeID, Name, Department, Salary) 
+VALUES (6, 'Huge Axeman', 'Finance', 3000);
+
+INSERT INTO EmployeeProjects (EmployeeID, ProjectID, Role) 
+VALUES (6, 103, 'Auditor');
+
+IF @@ERROR <> 0
+    ROLLBACK TRANSACTION;
+ELSE
+    COMMIT TRANSACTION;
 
