@@ -119,3 +119,10 @@ SELECT e.Name, p.ProjectName, ep.Role
 FROM EmployeeProjects ep 
 JOIN Employees e ON e.EmployeeID = ep.EmployeeID
 JOIN Projects p ON p.ProjectID = ep.ProjectID
+
+-- 07. Department with the Highest Total Salary
+
+SELECT TOP 1 Department, SUM(Salary) AS TotalSalary
+FROM Employees
+GROUP BY Department
+ORDER BY SUM(Salary) DESC
