@@ -57,3 +57,10 @@ SELECT s.Name, c.CourseName
 FROM Students s
 JOIN Enrollments e ON e.StudentID = s.StudentID
 JOIN Courses c ON c.CourseID = e.CourseID
+
+-- 04. Count Students Per Course
+
+SELECT c.CourseName, COUNT(DISTINCT e.StudentID) AS StudentCount
+FROM Enrollments e
+JOIN Courses c ON c.CourseID = e.CourseID
+GROUP BY c.CourseName
