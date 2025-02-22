@@ -134,3 +134,11 @@ FROM EmployeeProjects
 GROUP BY EmployeeID
 HAVING COUNT(DISTINCT ProjectID) > 1
 
+-- 09. Budget Per Project
+
+SELECT p.ProjectName, SUM(e.Salary) AS BudgetSpent
+FROM EmployeeProjects ep 
+JOIN Employees e ON e.EmployeeID = ep.EmployeeID
+JOIN Projects p ON p.ProjectID = ep.ProjectID
+GROUP BY p.ProjectName
+
