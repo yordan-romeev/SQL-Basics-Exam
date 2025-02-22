@@ -215,3 +215,24 @@ JOIN EmployeeProjects ep ON e.EmployeeID = ep.EmployeeID
 JOIN Projects p ON ep.ProjectID = p.ProjectID
 WHERE p.Budget > @AveragaBudget;
 GO
+
+--15. Archive Completed Projects
+
+-- IF ArchivedProjects table does not Exist
+SELECT ProjectID, ProjectName, Budget 
+INTO ArchivedProjects
+FROM Projects
+WHERE ProjectID NOT IN (SELECT DISTINCT ProjectID FROM EmployeeProjects);
+
+DELETE 
+FROM Projects 
+WHERE ProjectID NOT IN (SELECT DISTINCT ProjectID FROM EmployeeProjects);
+
+-- IF ArchivedProjects table exists
+INSERT INTO ArchivedProjects (ProjectID, ProjectName, Budget)
+SELECT ProjectID, ProjectName, Budget FROM Projects
+WHERE ProjectID NOT IN (SELECT DISTINCT ProjectID FROM EmployeeProjects);
+
+DELETE 
+FROM Projects 
+WHERE ProjectID NOT IN (SELECT DISTINCT ProjectID FROM EmployeeProjects);
