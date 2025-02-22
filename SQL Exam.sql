@@ -25,3 +25,28 @@ CREATE TABLE Enrollments (
 
 GO
 
+-- 02. Insert Sample Data
+
+INSERT INTO Students (Name, Age) VALUES
+('Alice', 20),
+('Bob', 22),
+('Charlie', 21)
+
+GO
+
+INSERT INTO Courses (CourseName) VALUES
+('Mathematics'),
+('Physics'),
+('Computer Science')
+
+GO
+
+INSERT INTO Enrollments (StudentID, CourseID) VALUES
+(1,101),
+(1,103),
+(2,103),
+(3,101),
+(3,102),
+(3,103)
+
+GO
