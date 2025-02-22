@@ -126,3 +126,11 @@ SELECT TOP 1 Department, SUM(Salary) AS TotalSalary
 FROM Employees
 GROUP BY Department
 ORDER BY SUM(Salary) DESC
+
+-- 08. Employees Working on More Than One Project
+
+SELECT EmployeeID, COUNT(DISTINCT ProjectID) AS ProjectCount
+FROM EmployeeProjects 
+GROUP BY EmployeeID
+HAVING COUNT(DISTINCT ProjectID) > 1
+
