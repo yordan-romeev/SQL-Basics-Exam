@@ -50,3 +50,10 @@ INSERT INTO Enrollments (StudentID, CourseID) VALUES
 (3,103)
 
 GO
+
+-- 03. All Students and Their Courses
+
+SELECT s.Name, c.CourseName
+FROM Students s
+JOIN Enrollments e ON e.StudentID = s.StudentID
+JOIN Courses c ON c.CourseID = e.CourseID
