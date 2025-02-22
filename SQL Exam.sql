@@ -142,3 +142,9 @@ JOIN Employees e ON e.EmployeeID = ep.EmployeeID
 JOIN Projects p ON p.ProjectID = ep.ProjectID
 GROUP BY p.ProjectName
 
+-- 10. Employees Without Projects
+
+SELECT *
+FROM Employees
+WHERE EmployeeID NOT IN (SELECT DISTINCT EmployeeID FROM EmployeeProjects)
+
